@@ -1,0 +1,112 @@
+{% extends "dashboard/master.html" %} {% load static %} 
+{% block title %}
+<title>Photo Gallery | The Era Of Cards</title>
+  
+{% endblock title %}
+{% block body %}
+<a href="{% url 'addgallery' %}"  class="btn btn-primary float-end mb-3">Add New Photo</a>
+
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Photo Gallery</h4>
+      <div class="table-responsive">
+        <table class="table table">
+          <thead>
+            <tr>
+
+              <th>ID</th>
+              <th>Gallery Image</th>
+              <th>Photo name</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          {% for g in gallery %}
+          <tbody>
+            
+            <tr>
+                <td>{{forloop.counter}}</td>
+              <td>
+                <img
+                  src="media/{{g.gallery_img}}"
+                  style="border-radius: 0px; height: 80px; width: 90px"
+                  alt="image"
+                />
+              </td>
+              <td>{{g.gallery_name}}</td>
+              <td>
+                {% if g.status == "Active" %}
+                <button class="btn btn-success">Active</button>
+                  {% else %}
+                <button class="btn btn-danger">Deactive</button>
+
+                {% endif %}
+              </td>
+              <td>
+            
+                <a  href="{% url 'editgallery' g.id %}" type="button" class="btn btn-warning btn-icon-text"> Edit <i class="mdi mdi-file-check btn-icon-append"></i>
+                </a>
+                <button type="button" class="btn btn-danger btn-icon-text gal" value="{{g.id}}">
+                  <i class="mdi mdi-alert btn-icon-prepend"></i> Delete </button>
+              </td>
+              
+            </tr>
+         
+
+          </tbody>
+          {% empty %}
+          <tr>
+<td></td>
+<td></td>
+<td class="text-center">No Records</td>
+<td></td>
+<td></td>
+<td></td>
+          </tr>
+
+             {% endfor %}
+        </table>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script>
+     $(".gal").click(function () {
+    swal({
+    title: 'Are you sure?',
+    text: 'Once deleted, you will not be able to recover this record!',
+    icon: 'warning',
+    buttons: true,
+    dangerMode: true,
+  })
+    .then((willDelete) => {
+      if (willDelete) {
+        
+     
+        var url="{% url 'delgal' 123 %}";
+        var id=$(this).attr("value");
+        console.log(id);
+        window.location.href=url.replace('123', id);
+      } else {
+        swal('Your Record is safe!');
+      }
+    });
+  });
+  </script>
+  {% if messages %}
+  {% for message in messages %}
+  <script>
+      $(document).ready(function(){
+          swal("{{message.tags}}", "{{message}}", "{{message.tags}}");
+          
+      });
+  
+  
+  </script>
+{% endfor %}
+{% endif %}
+{% endblock body %}

@@ -1,0 +1,108 @@
+{% extends "dashboard/master.html" %}
+{% load static %}
+{% block title %}
+<title>Dashboard | The Era Of Cards</title>
+  
+{% endblock title %}
+{% block body %}
+<div class="row">
+    <div class="col-md-4 grid-margin stretch-card ">
+      <div class="card">
+        <div class="card-body text-center">
+          <!-- <canvas id="transaction-history" class="transaction-chart"></canvas> -->
+          <img src="/media/{{request.user.userbase.profile}}" height="150px" width="150px" class="rounded-circle" alt="Set Your Profile In Account Section">
+          <div class="align-self-center">
+            <h3 class="mb-0 mt-3">{{request.user.userbase.first_name}} {{request.user.userbase.last_name}}</h3>
+          </div>
+
+          <h6 class="text-muted mt-2 font-weight-bold">{{request.user.userbase.designation}}</h6>
+          <br>
+
+          <h6 class="text-muted mt-2 font-weight-bold">Joined: {{request.user.date_joined}}</h6>
+          <br>
+          <div class="social">
+            <a href="{{request.user.userbase.twitter}}"><i class="mdi mdi-twitter"></i></a>
+            <a href="{{request.user.userbase.fb}}""><i class="mdi mdi-facebook"></i></a>
+            <a href="{{request.user.userbase.ig}}""><i class="mdi mdi-instagram"></i></a>
+            <a href="{{request.user.userbase.linkedin}}""><i class="mdi mdi-linkedin"></i></a>
+            <a href="https://wa.me/+91{{request.user.userbase.cus_phone}}"><i class="mdi mdi-whatsapp"></i></a>
+
+          </div>
+          <br>
+          <a href="{% url 'maincard' request.user %}" class="btn btn-primary btn-block "><i class="mdi mdi-account"></i>View Profile</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 grid-margin stretch-card ">
+      <div class="card">
+        <div class="card-body text-center">
+          <!-- <canvas id="transaction-history" class="transaction-chart"></canvas> -->
+          <div class="align-self-center">
+            <h4 class="text-primary">Hello {{user.first_name}} {{user.last_name}} Welcome To The Era Of Cards</h4>
+            <h4 class="text-secondary">We're Happy To serve You</h4>
+            <br>
+          </div>
+
+          <img src="{% static 'dashboard/assets/images/carousel/banner_14.jpg' %}" height="50%" width="50%" alt="">
+
+          
+        </div>
+      </div>
+    </div>
+    <h4>Quick Guide:</h4>
+    <br>
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Profile</h4>
+          <div class="media">
+            <i class="mdi mdi-account icon-md text-info d-flex align-self-start me-3"></i>
+            <div class="media-body">
+              <p class="card-text">For Adding The Company Details And Personal Details You Should Visit The Left Top Profile Section.There you'll find multiple settings regarding to your profile</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Layouts</h4>
+          <div class="media">
+            <i class="mdi mdi-grid icon-md text-info d-flex align-self-center me-3"></i>
+            <div class="media-body">
+              <p class="card-text">the layout section is the core section where you'll find diffrent layouts for your visting card and you can choose your available layouts ,and yes here comes a note that premium layouts will not be shown if you haven't bought membership.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Features According to Plan</h4>
+          <div class="media">
+            <i class="mdi mdi-wallet icon-md text-info d-flex align-self-end me-3"></i>
+            <div class="media-body">
+              <p class="card-text">you'll not recieve the extra premium Features in dashboard unless you change your membership.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+</div>
+{% if messages %}
+    {% for message in messages %}
+    <script>
+		$(document).ready(function(){
+			swal("{{message.tags}}", "{{message}}", "{{message.tags}}");
+			
+		});
+	
+	</script>
+  {% endfor %}
+  {% endif %}
+{% endblock body %}
+

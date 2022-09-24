@@ -1,0 +1,92 @@
+{% extends "dashboard/master.html" %} {% load static %}
+{% block title %}
+<title>Layouts | The Era Of Cards</title>
+  
+{% endblock title %}
+ {% block body %}
+ <form action="" method="post">
+{% csrf_token %}
+ <div class="row">
+    <div class="col-md-3 grid-margin stretch-card ">
+        
+      <div class="card">
+      <h5 class="card-title text-center mt-2">The Dark </h5>
+
+        <div class="card-body text-center">
+          <img src="{% static 'dashboard/assets/images/demo.png' %}" height="100%" width="100%" alt="">
+
+          <input type="radio"
+          class="form-check-input mt-2"
+          name="membershipRadios"
+          id="membershipRadios1"
+          value=""
+          checked />
+          <!-- <canvas id="transaction-history" class="transaction-chart"></canvas> -->
+        </div>
+      </div>
+    </div> 
+    <div class="col-md-3 grid-margin stretch-card ">
+        
+      <div class="card">
+      <h5 class="card-title text-center mt-2">The Dark </h5>
+
+        <div class="card-body text-center">
+          <img src="{% static 'dashboard/assets/images/demo.png' %}" height="100%" width="100%" alt="">
+
+          <input type="radio"
+          class="form-check-input mt-2"
+          name="membershipRadios"
+          id="membershipRadios1"
+          value=""
+          checked />
+          <!-- <canvas id="transaction-history" class="transaction-chart"></canvas> -->
+        </div>
+      </div>
+    </div> 
+    <div class="col-md-3 grid-margin stretch-card ">
+        
+      <div class="card">
+      <h5 class="card-title text-center mt-2">The Dark </h5>
+
+        <div class="card-body text-center">
+          <img src="{% static 'dashboard/assets/images/demo.png' %}" height="100%" width="100%" alt="">
+
+          <input type="radio"
+          class="form-check-input mt-2"
+          name="membershipRadios"
+          id="membershipRadios1"
+          value=""
+          checked />
+          <!-- <canvas id="transaction-history" class="transaction-chart"></canvas> -->
+        </div>
+      </div>
+    </div> 
+    <div class="col-md-3 grid-margin stretch-card ">
+        
+      <div class="card">
+      <h5 class="card-title text-center mt-2">The Dark </h5>
+
+        <div class="card-body text-center">
+          <img src="{% static 'dashboard/assets/images/demo.png' %}" height="100%" width="100%" alt="">
+
+          <input type="radio"
+          class="form-check-input mt-2"
+          name="membershipRadios"
+          id="membershipRadios1"
+          value=""
+          checked />
+          <!-- <canvas id="transaction-history" class="transaction-chart"></canvas> -->
+        </div>
+      </div>
+    </div> 
+    
+</div> 
+<button type="button" id="set" class="btn btn-primary">Set Layout</button>
+  </form>
+
+  <script>
+    $("#set").click(function () {
+  swal('', 'Layout Updated Successfully', 'success');
+});
+  </script>
+ {% endblock body %}

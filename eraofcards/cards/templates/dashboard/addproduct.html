@@ -1,0 +1,56 @@
+{% extends "dashboard/master.html" %} {% load static %}
+{% block title %}
+<title>Add Product | The Era Of Cards</title>
+  
+{% endblock title %}
+ {% block body %}
+ <div class="col-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Add Product</h4>
+        <p class="card-description">Product Info </p>
+        <form class="forms-sample"  action="{% url 'addproduct' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleInputName1">Product Name</label>
+            <input type="text" name="pname" class="form-control" id="exampleInputName1" placeholder="Product Name">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Product Details</label>
+            <input type="text" name="pdetails" class="form-control" id="exampleInputName2" placeholder="Product Details">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Product Photo</label>
+            <input type="file" name="pimg" class="form-control" id="exampleInputName2" placeholder="Product Image">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword4">Status</label>
+            <select name="status" id="" class="form-control">
+
+              {% if prod.status == "Active" %}
+              <option value="Active" selected>Active</option>
+              <option value="Deactive">Deactive</option>
+              {% else %}
+                <option value="Active">Active</option>
+                <option value="Deactive" selected>Deactive</option>
+              {% endif %}
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary me-2">Add Product</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% if messages %}
+    {% for message in messages %}
+    <script>
+		$(document).ready(function(){
+			swal("{{message.tags}}", "{{message}}", "{{message.tags}}");
+			
+		});
+	
+	</script>
+  {% endfor %}
+  {% endif %}
+{% endblock body %}

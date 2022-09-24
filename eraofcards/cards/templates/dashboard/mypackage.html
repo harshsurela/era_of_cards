@@ -1,0 +1,46 @@
+{% extends "dashboard/master.html" %} {% load static %}
+{% block title %}
+<title>My Package | The Era Of Cards</title>
+  
+{% endblock title %}
+{% block body %}
+
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">My Package</h4>
+      <div class="table-responsive">
+        <table class="table table">
+          <thead>
+            <tr>
+
+              <th>Package Name</th>
+              <th>Package Type</th>
+              <th>Package Price</th>
+              <th>Expiry Date</th>
+              <th>Remaining Days</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                <td>Silver</td>
+              <td>
+               Monthly
+              </td>
+              <td>1500</td>
+              <td>25/01/2023</td>
+              <td>
+                
+            365
+              </td>
+              <td><label  class="btn btn-success">Active</label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

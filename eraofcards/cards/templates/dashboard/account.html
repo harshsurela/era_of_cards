@@ -1,0 +1,307 @@
+{% extends "dashboard/master.html" %} {% load static %} 
+{% block title %}
+<title>Account Settings | The Era Of Cards</title>
+  
+{% endblock title %}
+{% block body %}
+<div class="col-12 grid-margin">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Account Settings</h4>
+      <form class="form-sample" action="{% url 'accountsettings' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <p class="card-description">Personal info</p>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">First Name</label>
+              <div class="col-sm-9">
+                <input type="text" name="fname" class="form-control" value="{{user.first_name}}" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Last Name</label>
+              <div class="col-sm-9">
+                <input type="text" name="lname" class="form-control" value="{{user.last_name}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Designation</label>
+              <div class="col-sm-9">
+                <input type="text" name="desig" class="form-control" value="{{user.designation}}" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Organization</label>
+              <div class="col-sm-9">
+                <input type="text" name="org" class="form-control" value="{{user.organization}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Website</label>
+              <div class="col-sm-9">
+                <input type="text" name="website" class="form-control" value="{{user.website}}" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Phone</label>
+              <div class="col-sm-9">
+                <input type="text" name="phone"  pattern="[0-9]{10}" class="form-control" value="{{user.cus_phone}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Whatsapp</label>
+              <div class="col-sm-9">
+                <input type="text" name="wp" class="form-control" value="{{user.cus_phone}}" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Skype</label>
+              <div class="col-sm-9">
+                <input type="text" name="skype" class="form-control" value="{{user.skype}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">About Me</label>
+              <div class="col-sm-9">
+                <textarea
+                  class="form-control"
+                  name="about"
+                  id="aboutme"
+                  cols="100"
+                  rows="100"
+                  
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Bank Details</label>
+              <div class="col-sm-9">
+                <textarea
+                  class="form-control"
+                  name="bank"
+                  id="bank"
+                  cols="100"
+                  rows="100"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Visitor Counter</label>
+              <div class="col-sm-9">
+                <input type="text" name="visitor" class="form-control" value="{{user.visitor_count}}" readonly style="background-color: #2A3038;"/>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Profile Photo</label>
+
+              <div class="col-sm-9">
+                <input type="file" name="propic" id="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="card-description">Address</p>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Address 1</label>
+              <div class="col-sm-9">
+                <textarea
+                  class="form-control"
+                  name="add1"
+                  id="add1"
+                  cols="100"
+                  rows="100"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Country</label>
+              <div class="col-sm-9">
+                <select id="country-data" class="form-control" name="country">
+                  <option selected disabled>Choose a Country</option>
+                  {% if country %} {% for c in country %}
+                  {% if user.city_id.state_id.country_id == c %}
+                  <option value="{{user.city_id.state_id.country_id.id}}" selected>{{user.city_id.state_id.country_id}}</option>
+                  {% else %}
+                  <option value="{{c.id}}">{{c.country_name}}</option>
+                  {% endif %}
+                  {% endfor %} {% endif %}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Address 2</label>
+              <div class="col-sm-9">
+                <textarea
+                  class="form-control"
+                  name="add2"
+                  id="add2"
+                  cols="100"
+                  rows="100"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">State</label>
+              <div class="col-sm-9">
+                <select
+                  name="state"
+                  class="form-control"
+                  id="state-data"
+                >
+                <option value="{{user.city_id.state_id}}" selected>{{user.city_id.state_id.state_name}}</option></select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Postcode</label>
+              <div class="col-sm-9">
+                <input type="text" name="pincode" class="form-control" value="{{user.pincode}}" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">City</label>
+              <div class="col-sm-9">
+                <select
+                  name="city"
+                  class="form-control"
+                  id="city-data"
+                >
+                <option value="{{user.city_id.id}}" selected>{{user.city_id.city_name}}</option></select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" id="pro" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+
+<script>
+
+$(document).ready(function(){
+  document.getElementById("aboutme").value = `{{user.aboutme}}`; 
+  document.getElementById("bank").value = `{{user.bank_details}}`; 
+  document.getElementById("add1").value = `{{user.cus_add1}}`; 
+  document.getElementById("add2").value = `{{user.cus_add2}}`; 
+});
+        
+
+  //the ajax function for country
+  $("#country-data").change(function () {
+    const country_id = $(this).val();
+    console.log(country_id);
+    $.ajax({
+      type: "POST",
+      url: "{% url 'country_ajax-data' %}",
+      data: {
+        country_id: country_id,
+        csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+      },
+      success: function (data) {
+        console.log("Success");
+        let html_data =
+          '<option value="" selected disabled>Choose State </option>';
+        data.forEach(function (data) {
+          html_data =
+            html_data +
+            `<option value="${data.id}">${data.state_name}</option>`;
+        });
+        $("#state-data").html(html_data);
+      },
+      error: function (error) {
+        console.log("Error");
+      },
+    });
+  });
+  //the ajax function for states and city
+  $("#state-data").change(function () {
+    const state_id = $(this).val();
+    console.log(state_id);
+    $.ajax({
+      type: "POST",
+      url: "{% url 'state_ajax-data' %}",
+      data: {
+        state_id: state_id,
+        csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+      },
+      success: function (data) {
+        console.log("Success");
+        let html_data =
+          '<option value="" selected disabled>Choose City </option>';
+        data.forEach(function (data) {
+          html_data =
+            html_data + `<option value="${data.id}">${data.city_name}</option>`;
+        });
+        $("#city-data").html(html_data);
+      },
+      error: function (error) {
+        console.log("Error");
+      },
+    });
+  });
+</script>
+
+{% if messages %}
+    {% for message in messages %}
+    <script>
+		$(document).ready(function(){
+			swal("{{message.tags}}", "{{message}}", "{{message.tags}}");
+			
+		});
+	
+	</script>
+  {% endfor %}
+  {% endif %}
+{% endblock body %}

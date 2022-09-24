@@ -1,0 +1,52 @@
+{% extends "dashboard/master.html" %} {% load static %}
+{% block title %}
+<title>Add Gallery | The Era Of Cards</title>
+  
+{% endblock title %}
+ {% block body %}
+ <div class="col-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Add Gallery</h4>
+        <p class="card-description">Gallery Info </p>
+        <form class="forms-sample"  action="{% url 'addgallery' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleInputName1">Photo Name</label>
+            <input type="text" name="gname" class="form-control" id="exampleInputName1" placeholder="Photo Name">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Gallery Photo</label>
+            <input type="file" name="gimg" class="form-control" id="exampleInputName2" placeholder="Gallery Photo">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword4">Status</label>
+            <select name="status" id="" class="form-control">
+
+              {% if gal.status == "Active" %}
+              <option value="Active" selected>Active</option>
+              <option value="Deactive">Deactive</option>
+              {% else %}
+                <option value="Active">Active</option>
+                <option value="Deactive" selected>Deactive</option>
+              {% endif %}
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary me-2">Add To Gallery</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% if messages %}
+    {% for message in messages %}
+    <script>
+		$(document).ready(function(){
+			swal("{{message.tags}}", "{{message}}", "{{message.tags}}");
+			
+		});
+	
+	</script>
+  {% endfor %}
+  {% endif %}
+{% endblock body %}

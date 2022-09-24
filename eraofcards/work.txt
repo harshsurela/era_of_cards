@@ -1,0 +1,9 @@
+ homepage ->mostly done just need few changes
+ dashboard->photo gallery and video gallery is pending in main features and the sub features like add product ,add service are pending in UI
+user visiting Card UI
+alert.js
+ design models for database
+ integrate the payment gateway
+ backend for everthing
+
+ multiple bussiness 

@@ -187,9 +187,9 @@ def services(request):
 
 
 @login_required(login_url='sign-in')
-def feedback(request):
-    feed = Feedback.objects.all()
-    return render(request, "dashboard/feedback.html", {'feed': feed})
+def testimonial(request):
+    test = Testimonial.objects.all()
+    return render(request, "dashboard/testimonial.html", {'test': test})
 
 
 @login_required(login_url='sign-in')
@@ -205,6 +205,8 @@ def payments(request):
 @login_required(login_url='sign-in')
 def appointments(request):
     return render(request, "dashboard/appointments.html")
+
+
 
 
 @login_required(login_url='sign-in')
@@ -299,6 +301,27 @@ def addvgallery(request):
 
 @login_required(login_url='sign-in')
 def addservice(request):
+    if request.method == "POST":
+        sname = request.POST.get("sname")
+        sdetails = request.POST.get("sdetails")
+        status = request.POST.get("status")
+        serv = Service()
+        try:
+            simg = request.FILES.get("simg")
+            serv.service_img = simg
+        except Exception as e:
+            print(e)
+        serv.service_name = sname
+        serv.service_desc = sdetails
+        serv.status = status
+        serv.user_id = UserBase(request.user.id)
+        serv.save()
+        messages.success(request, "Service Added")
+        return redirect("services")
+    return render(request, "dashboard/addservice.html")
+
+@login_required(login_url='sign-in')
+def addtest(request):
     if request.method == "POST":
         sname = request.POST.get("sname")
         sdetails = request.POST.get("sdetails")
@@ -461,12 +484,19 @@ def delvgal(request, id):
     messages.success(request, "Video Removed")
     return redirect("videogal")
 
+# @login_required(login_url='sign-in')
+# def delfeed(request, id):
+#     feed = Feedback.objects.get(id=id)
+#     feed.delete()
+#     messages.success(request, "Feedback Removed")
+#     return redirect("feedback")
+
 @login_required(login_url='sign-in')
-def delfeed(request, id):
-    feed = Feedback.objects.get(id=id)
-    feed.delete()
-    messages.success(request, "Feedback Removed")
-    return redirect("feedback")
+def deltest(request, id):
+    test = Testimonial.objects.get(id=id)
+    test.delete()
+    messages.success(request, "testimonial Removed")
+    return redirect("testimonial")
 
 
 def page_not_found_view(request, exception):
@@ -497,19 +527,19 @@ def maincard(request, username):
         prod = Product.objects.filter(user_id=user.id, status="Active")
         gal = Gallery.objects.filter(user_id=user.id, status="Active")
         vgal = Vgallery.objects.filter(user_id=user.id, status="Active")
-        feed = Feedback.objects.filter(user_id=user.id)
+        test = Testimonial.objects.filter(user_id=user.id)
         serv = Service.objects.filter(user_id=user.id, status="Active")
         for data in vars(userdata).items():
             print(data)
         print(prod)
         print(gal)
         print(vgal)
-        print(feed)
+        print(test)
         print(serv)
         # return render(request, "dashboard/card.html", {'userdata': userdata, 'gal': gal, 'vgal': vgal, 'prod': prod, 'feed': feed, 'serv': serv})
         directory=os.path.join(settings.BASE_DIR,'cards/templates/Cards_Users/{}'.format(userdata.user_id.username))
         data=open("{}.html".format(directory),"w")
-        data.write(str(render(request, "dashboard/card.html", {'userdata': userdata, 'gal': gal, 'vgal': vgal, 'prod': prod, 'feed': feed, 'serv': serv}).content.decode("utf-8")))
+        data.write(str(render(request, "dashboard/card.html", {'userdata': userdata, 'gal': gal, 'vgal': vgal, 'prod': prod, 'test': test, 'serv': serv}).content.decode("utf-8")))
         data.close()
         return render(request,f"Cards_Users/{userdata.user_id.username}.html")
         

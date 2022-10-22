@@ -85,15 +85,16 @@ class Appointment(models.Model):
         return str(self.id)
 
 
-class Feedback(models.Model):
+class Testimonial(models.Model):
     client_name=models.CharField(max_length=20)
-    fb_title=models.CharField(max_length=45)
-    fb_desc=models.TextField()
-    fb_date=models.DateTimeField(auto_now=True)
+    client_image=models.ImageField(upload_to='Testimonials/')
+    test_title=models.CharField(max_length=45)
+    test_desc=models.TextField()
+    test_date=models.DateTimeField(auto_now=True)
     user_id=models.ForeignKey(UserBase,on_delete=CASCADE,default=None)
     
     def __str__(self) -> str:
-        return self.fb_title
+        return self.test_title
 
 class Gallery(models.Model):
     gallery_img=models.ImageField(upload_to="Gallery/")

@@ -246,6 +246,7 @@ def addproduct(request):
         pname = request.POST.get("pname")
         pdetails = request.POST.get("pdetails")
         status = request.POST.get("status")
+        print(status)
         prod = Product()
         try:
             pimg = request.FILES.get("pimg")
@@ -254,7 +255,11 @@ def addproduct(request):
             print(e)
         prod.product_name = pname
         prod.desc = pdetails
-        prod.status = status
+        if status == "on":
+            prod.status = "active"
+        else:
+            prod.status = "deactive"
+        
         prod.user_id = UserBase(request.user.id)
         prod.save()
         messages.success(request, "Product Added")
@@ -274,7 +279,10 @@ def addgallery(request):
         except Exception as e:
             print(e)
         gal.gallery_name = gname
-        gal.status = status
+        if status == "on":
+            gal.status = "active"
+        else:
+            gal.status = "deactive"
         gal.user_id = UserBase(request.user.id)
         gal.save()
         messages.success(request, "Photo Added To Gallery ")
@@ -291,7 +299,10 @@ def addvgallery(request):
         vgal = Vgallery()
         vgal.vgallery_name = vgname
         vgal.vgallery_link = vglink
-        vgal.status = status
+        if status == "on":
+            vgal.status = "active"
+        else:
+            vgal.status = "deactive"
         vgal.user_id = UserBase(request.user.id)
         vgal.save()
         messages.success(request, "Video Added To Gallery ")
@@ -313,7 +324,10 @@ def addservice(request):
             print(e)
         serv.service_name = sname
         serv.service_desc = sdetails
-        serv.status = status
+        if status == "on":
+            serv.status = "active"
+        else:
+            serv.status = "deactive"
         serv.user_id = UserBase(request.user.id)
         serv.save()
         messages.success(request, "Service Added")
@@ -323,23 +337,28 @@ def addservice(request):
 @login_required(login_url='sign-in')
 def addtest(request):
     if request.method == "POST":
-        sname = request.POST.get("sname")
-        sdetails = request.POST.get("sdetails")
+        cname = request.POST.get("clientName")
+        testTitle = request.POST.get("testTitle")
+        testDesc = request.POST.get("testDesc")
         status = request.POST.get("status")
-        serv = Service()
+        test=Testimonial()
         try:
-            simg = request.FILES.get("simg")
-            serv.service_img = simg
+            clientImg = request.FILES.get("clientImg")
+            test.client_image=clientImg
         except Exception as e:
             print(e)
-        serv.service_name = sname
-        serv.service_desc = sdetails
-        serv.status = status
-        serv.user_id = UserBase(request.user.id)
-        serv.save()
-        messages.success(request, "Service Added")
-        return redirect("services")
-    return render(request, "dashboard/addservice.html")
+        test.client_name=cname
+        test.test_title=testTitle
+        test.test_desc=testDesc
+        if status == "on":
+            test.status = "active"
+        else:
+            test.status = "deactive"
+        test.user_id = UserBase(request.user.id)
+        test.save()
+        messages.success(request, "Testimonial Added")
+        return redirect("testimonial")
+    return render(request, "dashboard/addtestimonial.html")
 
 
 @login_required(login_url='sign-in')
@@ -357,12 +376,44 @@ def editproduct(request, id):
             print(e)
         prod.product_name = pname
         prod.desc = pdetails
-        prod.status = status
+        if status == "on":
+            prod.status = "active"
+        else:
+            prod.status = "deactive"
         prod.user_id = UserBase(request.user.id)
         prod.save()
         messages.success(request, "Product Updated")
         return redirect("product")
     return render(request, "dashboard/editproduct.html", {'prod': prod})
+
+
+@login_required(login_url='sign-in')
+def edittest(request, id):
+    test = Testimonial.objects.get(id=id)
+    if request.method == "POST":
+        cname = request.POST.get("clientName")
+        testTitle = request.POST.get("testTitle")
+        testDesc = request.POST.get("testDesc")
+        status = request.POST.get("status")
+        try:
+            clientImg = request.FILES.get("clientImg")
+            if clientImg is not None:
+                test.client_image=clientImg
+        except Exception as e:
+            print(e)
+        test.client_name=cname
+        test.test_title=testTitle
+        test.test_desc=testDesc
+        if status == "on":
+            test.status = "active"
+        else:
+            test.status = "deactive"
+        
+        test.user_id = UserBase(request.user.id)
+        test.save()
+        messages.success(request, "Testimonial Updated")
+        return redirect("testimonial")
+    return render(request, "dashboard/edittestimonial.html", {'test': test})
 
 
 @login_required(login_url='sign-in')
@@ -378,7 +429,10 @@ def editgallery(request, id):
         except Exception as e:
             print(e)
         gal.gallery_name = gname
-        gal.status = status
+        if status == "on":
+            gal.status = "active"
+        else:
+            gal.status = "deactive"
         gal.user_id = UserBase(request.user.id)
         gal.save()
         messages.success(request, "Gallery Updated")
@@ -395,7 +449,10 @@ def editvgallery(request, id):
         status = request.POST.get("status")
         vgal.vgallery_name = vgname
         vgal.vgallery_link = vglink
-        vgal.status = status
+        if status == "on":
+            vgal.status = "active"
+        else:
+            vgal.status = "deactive"
         vgal.user_id = UserBase(request.user.id)
         vgal.save()
         messages.success(request, "Video Gallery Updated")
@@ -418,7 +475,10 @@ def editservice(request, id):
             print(e)
         serv.service_name = sname
         serv.service_desc = sdetails
-        serv.status = status
+        if status == "on":
+            serv.status = "active"
+        else:
+            serv.status = "deactive"
         serv.user_id = UserBase(request.user.id)
         serv.save()
         messages.success(request, "Service Updated")
@@ -443,6 +503,9 @@ def signIn(request):
         else:
             messages.warning(request, "Invalid Username And Password!!")
             redirect("sign-in")
+    else:
+        if request.user.is_authenticated:
+            return redirect("dashboard")
     return render(request, "auth/login.html")
 
 
@@ -460,6 +523,12 @@ def delprod(request, id):
     messages.success(request, "Product Removed")
     return redirect("product")
 
+@login_required(login_url='sign-in')
+def deltest(request, id):
+    test = Testimonial.objects.get(id=id)
+    test.delete()
+    messages.success(request, "Testimonial Removed")
+    return redirect("testimonial")
 
 @login_required(login_url='sign-in')
 def delserv(request, id):
@@ -491,12 +560,7 @@ def delvgal(request, id):
 #     messages.success(request, "Feedback Removed")
 #     return redirect("feedback")
 
-@login_required(login_url='sign-in')
-def deltest(request, id):
-    test = Testimonial.objects.get(id=id)
-    test.delete()
-    messages.success(request, "testimonial Removed")
-    return redirect("testimonial")
+
 
 
 def page_not_found_view(request, exception):

@@ -13,24 +13,15 @@
           {% csrf_token %}
           <div class="form-group">
             <label for="exampleInputName1">Photo Name</label>
-            <input type="text" name="gname" class="form-control" id="exampleInputName1" placeholder="Photo Name">
+            <input type="text" name="gname" class="form-control text-white" id="exampleInputName1" placeholder="Photo Name">
           </div>
           <div class="form-group">
             <label for="exampleInputEmail3">Gallery Photo</label>
-            <input type="file" name="gimg" class="form-control" id="exampleInputName2" placeholder="Gallery Photo">
+            <input type="file" name="gimg" class="form-control text-white" id="exampleInputName2" placeholder="Gallery Photo">
           </div>
-          <div class="form-group">
-            <label for="exampleInputPassword4">Status</label>
-            <select name="status" id="" class="form-control">
-
-              {% if gal.status == "Active" %}
-              <option value="Active" selected>Active</option>
-              <option value="Deactive">Deactive</option>
-              {% else %}
-                <option value="Active">Active</option>
-                <option value="Deactive" selected>Deactive</option>
-              {% endif %}
-            </select>
+          <div class="form-switch form-group">
+            <input class="form-check-input" type="checkbox" name="status" id="flexSwitchCheckChecked" checked>
+            <label class="form-check-label mt-1" for="flexSwitchCheckChecked">Active</label>
           </div>
 
           <button type="submit" class="btn btn-primary me-2">Add To Gallery</button>

@@ -57,53 +57,7 @@
                   <span>Gold Member</span>
                 </div>
               </div>
-              <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
-              <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
-                <a href="{% url 'accountsettings' %}" class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-dark rounded-circle">
-                      <i class="mdi mdi-settings text-primary"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="{% url 'socialsettings' %}" class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-dark rounded-circle">
-                      <i class="mdi mdi-instagram  text-danger"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject ellipsis mb-1 text-small">Social Settings</p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="{% url 'features' %}" class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-dark rounded-circle">
-                      <i class="mdi mdi-light-switch  text-info"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject ellipsis mb-1 text-small">On/Off Features</p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="{% url 'changepass' %}" class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-dark rounded-circle">
-                      <i class="mdi mdi-update  text-info"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
-                  </div>
-                </a>
-               
-            </div>
+             
           </li>
           <li class="nav-item nav-category">
             <span class="nav-link">Navigation</span>
@@ -196,6 +150,30 @@
                 <i class="mdi mdi-coin"></i>
               </span>
               <span class="menu-title">Payments</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{% url 'accountsettings' %}">
+              <span class="menu-icon">
+                <i class="mdi mdi-settings"></i>
+              </span>
+              <span class="menu-title">Account settings</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{% url 'socialsettings' %}">
+              <span class="menu-icon">
+                <i class="mdi mdi-instagram"></i>
+              </span>
+              <span class="menu-title">Social Settings</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{% url 'features' %}">
+              <span class="menu-icon">
+                <i class="mdi mdi-light-switch"></i>
+              </span>
+              <span class="menu-title">on/off Features</span>
             </a>
           </li>
           <li class="nav-item menu-items">
@@ -325,6 +303,17 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
                   <div class="dropdown-divider"></div>
+                 
+                  <a class="dropdown-item preview-item" href="{% url 'changepass' %}">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-update  text-info"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Change Password</p>
+                    </div>
+                  </a>
                   <a class="dropdown-item preview-item" href="{% url 'logout_user' %}">
                     <div class="preview-thumbnail">
                       <div class="preview-icon bg-dark rounded-circle">

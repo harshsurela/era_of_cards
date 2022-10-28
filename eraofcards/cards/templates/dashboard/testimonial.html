@@ -1,6 +1,6 @@
 {% extends "dashboard/master.html" %} {% load static %}
 {% block title %}
-<title>Feedbacks | The Era Of Cards</title>
+<title>Testimonials | The Era Of Cards</title>
   
 {% endblock title %}
 {% block body %}
@@ -15,34 +15,45 @@
           <thead>
             <tr>
 
-              <th>Testimonial ID</th>
               <th>Testimonial Title</th>
               <th>Testimonial Description</th>
               <th>Client Name</th>
               <th>Client Image</th>
               <th>Feedback Date</th>
+              <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {% for t in test  %}
             <tr>
-                <td>{{forloop.counter}}</td>
               <td>
                 {{t.test_title}}
               </td>
               <td>{{t.test_desc}}</td>
               <td><span>{{t.client_name}}</span></td>
-              <td><img src="media/{{t.client_image}}" alt=""></td>
+              <td><img src="/media/{{t.client_image}}"  style="border-radius: 0px; height: 60px; width: 90px" alt="Not Found"></td>
               <td>{{t.test_date.date}}</td>
               <td>
-                <button type="button" value="{{t.id}}" class="btn btn-danger btn-icon-text feed">
+                {% if t.status == "Active" %}
+                <h5 class="text-success">Active</h5>
+                  {% else %}
+                <h5 class="text-danger">Deactive</h5>
+                {% endif %}
+              </td>
+              <td>
+                
+                <a  href="{% url 'edittest' t.id %}" type="button" class="btn btn-warning btn-icon-text"> Edit <i class="mdi mdi-file-check btn-icon-append"></i>
+                </a>
+            
+                <button type="button" value="{{t.id}}" class="btn btn-danger btn-icon-text test">
                   <i class="mdi mdi-alert btn-icon-prepend"></i> Delete </button>
               </td>
               
             </tr>
             {% empty %}
             <tr>
+              <td></td>
               <td></td>
               <td></td>
               <td>No Records</td>
@@ -64,7 +75,7 @@
   </div>
 </div>
 <script>
-  $(".feed").click(function () {
+  $(".test").click(function () {
    swal({
    title: 'Are you sure?',
    text: 'Once deleted, you will not be able to recover this record!',
@@ -86,4 +97,16 @@
    });
  });
 </script>
+{% if messages %}
+    {% for message in messages %}
+    <script>
+		$(document).ready(function(){
+			swal("{{message.tags}}", "{{message}}", "{{message.tags}}");
+			
+		});
+    
+	
+	</script>
+  {% endfor %}
+  {% endif %}
 {% endblock body %}

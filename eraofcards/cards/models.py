@@ -91,6 +91,8 @@ class Testimonial(models.Model):
     test_title=models.CharField(max_length=45)
     test_desc=models.TextField()
     test_date=models.DateTimeField(auto_now=True)
+    status=models.CharField(max_length=30,default="active")
+
     user_id=models.ForeignKey(UserBase,on_delete=CASCADE,default=None)
     
     def __str__(self) -> str:

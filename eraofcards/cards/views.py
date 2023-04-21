@@ -1,4 +1,3 @@
-from msilib.schema import Directory
 from django.conf import settings
 import os
 from django.template import RequestContext
@@ -8,10 +7,10 @@ from .models import *
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-# import pywhatkit
+# import pywhatkit  
 
 # Create your views here.
-
+ 
 
 def home(request):
     return render(request, "home/index.html")

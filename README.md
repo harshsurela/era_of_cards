@@ -47,7 +47,7 @@ Let's build together! 🚀
 
 For any inquiries or feedback, feel free to reach out:
 
-- Email: your@email.com
+- Email: harshsurela8@gmail.com
 - LinkedIn: Harsh Surela (https://www.linkedin.com/in/harsh-surela-2b73aa21a/)
 
 ## License 📝
